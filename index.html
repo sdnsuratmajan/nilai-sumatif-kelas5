@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perolehan Nilai Sumatif Akhir Murni SD Negeri Suratmajan</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #1877f2, #3b5998);
+      color: white;
+      text-align: center;
+    }
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    input {
+      background-color: #f0f0f0;
+    }
+    button {
+      background-color: #4267B2;
+      color: white;
+      cursor: pointer;
+    }
+    .nilai-table {
+      margin-top: 20px;
+      background-color: white;
+      color: black;
+      border-radius: 5px;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="login-section">
+    <h2>Login Nilai</h2>
+    <input type="text" id="nama" placeholder="Masukkan Nama Lengkap">
+    <button onclick="cariNilai()">Lihat Nilai</button>
+  </div>
+
+  <div class="container" id="hasil-section" style="display:none;">
+    <h2>Hasil Nilai</h2>
+    <div class="nilai-table" id="tabel-nilai"></div>
+    <button onclick="kembali()">Kembali</button>
+  </div>
+
+  <script>
+    const dataNilai = {
+      "ADITYA NAUFAL SAPUTRA": [36,27,36,28,40,34,34,37,28],
+      "AFIQAH AULIA FARANISA": [84,83,71,71,95,83,75,79,72],
+      "AINA IZZATUNNISA": [69,67,52,73,68,67,67,72,35],
+      "AISYAH NUR RAHMAWATI": [90,70,57,62,89,71,66,85,84],
+      "APRILLIA BUY RAHMATIKA": [83,69,67,82,95,72,80,84,85],
+      "AQILLA AMANDA PUTRI": [76,52,57,72,69,49,60,89,64],
+      "ARDIAN PRATAMA WICAK SANA": [42,39,41,53,65,55,64,27,41],
+      "ARYA DWI PERMANA": [67,48,47,66,75,45,62,78,45],
+      "BAGUS BINTANG ADITYA": [69,45,47,79,68,65,67,57,49],
+      "DIRA LESTARI": [53,51,43,66,66,60,58,75,57],
+      "FADHIL AZWAR ALGEBRA": [78,71,53,60,88,54,65,83,66],
+      "FERDIAN AJI SYAHPUTRA": [47,42,46,52,60,43,66,40,40],
+      "IRAWAN AHMAD MAULANA": [48,44,40,58,67,49,62,44,51],
+      "MAHARDIKA PRATAMA": [60,55,48,57,68,47,67,52,45],
+      "NABILA RAMADHINA PRADITI": [83,61,57,65,81,56,61,64,51],
+      "NUR AINI ANISA KHOIRIYAH": [88,48,66,88,79,73,81,66,74],
+      "RABANI AGUNG RIYADI": [31,21,22,42,68,29,57,28,25],
+      "RAFA ADELIO HIROSHI": [68,58,45,55,67,47,59,68,47],
+      "YUSUF NAUVAL KARIM": [74,52,47,58,78,47,54,50,40],
+      "ZARA NADIA AKHYAR": [86,86,76,78,95,75,85,81,81]
+    };
+
+    const mapMataPelajaran = [
+      "Pendidikan Agama", "Pendidikan Pancasila", "Bahasa Indonesia", "Matematika",
+      "IPAS", "Seni Budaya", "PJOK", "Bahasa Inggris", "Bahasa Jawa"
+    ];
+
+    function cariNilai() {
+      const nama = document.getElementById('nama').value.trim().toUpperCase();
+      const hasil = dataNilai[nama];
+      if (hasil) {
+        let tabel = '<table><tr><th>Mata Pelajaran</th><th>Nilai</th></tr>';
+        for (let i = 0; i < hasil.length; i++) {
+          tabel += `<tr><td>${mapMataPelajaran[i]}</td><td>${hasil[i]}</td></tr>`;
+        }
+        tabel += '</table>';
+        document.getElementById('tabel-nilai').innerHTML = tabel;
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('hasil-section').style.display = 'block';
+      } else {
+        alert("Nama tidak ditemukan. Pastikan penulisan sesuai.");
+      }
+    }
+
+    function kembali() {
+      document.getElementById('login-section').style.display = 'block';
+      document.getElementById('hasil-section').style.display = 'none';
+      document.getElementById('nama').value = '';
+    }
+  </script>
+</body>
+</html>
